@@ -17,6 +17,10 @@ dotenv.config();
 const app = express();
 const PORT = parseInt(process.env.PORT || '3000', 10);
 
+// Render (and most PaaS) put a reverse proxy in front of the app,
+// so Express must trust the X-Forwarded-For header for rate limiting to work.
+app.set('trust proxy', 1);
+
 app.use(helmet());
 app.use(
   cors({
