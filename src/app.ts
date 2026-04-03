@@ -20,10 +20,10 @@ const PORT = parseInt(process.env.PORT || '3000', 10);
 app.use(helmet());
 app.use(
   cors({
-    origin: process.env.CORS_ORIGIN || '*',
+    origin: process.env.CORS_ORIGIN || "http://localhost:3000",
     methods: ['GET', 'POST', 'PUT', 'PATCH', 'DELETE', 'OPTIONS'],
     allowedHeaders: ['Content-Type', 'Authorization'],
-    credentials: true,
+    credentials: false,
   })
 );
 
@@ -55,10 +55,10 @@ const swaggerOptions: swaggerJsdoc.Options = {
       },
     },
     servers: [
-      {
-        url: `http://localhost:${PORT}`,
-        description: 'Development server',
-      },
+  {
+    url: process.env.BASE_URL || `http://localhost:${PORT}`,
+    description: 'Server',
+  },
     ],
     components: {
       securitySchemes: {
